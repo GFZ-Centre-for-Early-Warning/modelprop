@@ -47,7 +47,12 @@
             "D4_mean": 8.2,
             "D4_stddev": 0.8,
             "D5_mean": 9.2,
-            "D5_stddev": 0.8
+            "D5_stddev": 0.8,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "URM2",
@@ -60,7 +65,12 @@
             "D4_mean": 8.7,
             "D4_stddev": 0.9,
             "D5_mean": 9.8,
-            "D5_stddev": 0.9
+            "D5_stddev": 0.9,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "CM",
@@ -73,7 +83,12 @@
             "D4_mean": 10.5,
             "D4_stddev": 1.0,
             "D5_mean": 11.5,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RM",
@@ -86,7 +101,12 @@
             "D4_mean": 10.5,
             "D4_stddev": 1.0,
             "D5_mean": 11.5,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RC1",
@@ -99,7 +119,12 @@
             "D4_mean": 10.2,
             "D4_stddev": 1.0,
             "D5_mean": 11.3,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RC2",
@@ -112,7 +137,12 @@
             "D4_mean": 10.6,
             "D4_stddev": 1.0,
             "D5_mean": 11.6,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RC3",
@@ -125,7 +155,12 @@
             "D4_mean": 9.5,
             "D4_stddev": 0.9,
             "D5_mean": 10.6,
-            "D5_stddev": 0.9
+            "D5_stddev": 0.9,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RC4",
@@ -138,7 +173,12 @@
             "D4_mean": 10.9,
             "D4_stddev": 1.0,
             "D5_mean": 11.9,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RCPC1",
@@ -151,7 +191,12 @@
             "D4_mean": 11.1,
             "D4_stddev": 1.0,
             "D5_mean": 12.1,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RCPC464",
@@ -164,7 +209,12 @@
             "D4_mean": 11.4,
             "D4_stddev": 1.0,
             "D5_mean": 12.5,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RCPC2",
@@ -177,7 +227,12 @@
             "D4_mean": 9.0,
             "D4_stddev": 0.9,
             "D5_mean": 10.1,
-            "D5_stddev": 0.9
+            "D5_stddev": 0.9,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "RCPC111",
@@ -190,7 +245,12 @@
             "D4_mean": 10.5,
             "D4_stddev": 1.0,
             "D5_mean": 11.5,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "ADO",
@@ -203,7 +263,12 @@
             "D4_mean": 7.5,
             "D4_stddev": 0.7,
             "D5_mean": 8.4,
-            "D5_stddev": 0.7
+            "D5_stddev": 0.7,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "WOOD1",
@@ -216,7 +281,12 @@
             "D4_mean": 9.5,
             "D4_stddev": 0.9,
             "D5_mean": 10.5,
-            "D5_stddev": 0.9
+            "D5_stddev": 0.9,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "WOOD2",
@@ -229,7 +299,12 @@
             "D4_mean": 9.5,
             "D4_stddev": 0.9,
             "D5_mean": 10.5,
-            "D5_stddev": 0.9
+            "D5_stddev": 0.9,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         },
         {
             "taxonomy": "STEEL",
@@ -242,7 +317,12 @@
             "D4_mean": 12.3,
             "D4_stddev": 1.0,
             "D5_mean": 13.4,
-            "D5_stddev": 1.0
+            "D5_stddev": 1.0,
+			"id":"unique_id",
+			"imt":"pga",
+			"imu":"g",
+			"im_min":1.0,
+			"im_max":12.0
         }
     ]
 }
