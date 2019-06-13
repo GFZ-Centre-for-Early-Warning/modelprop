@@ -1,0 +1,17 @@
+{
+    "title": "ModelpropProcess",
+    "imageId": "assetmaster:latest",
+    "workingDirectory": "/usr/share/git/modelprop",
+    "commandToExecute": "python3 modelprop.py",
+    "exitValueHandler": "logging",
+    "stderrHandler": "logging",
+    "input": [
+        { "title" : "schema","useAs": "commandLineArgument", "type": "string", "default": "SARA_v1.0", "allowed": ["SARA_v1.0"]},
+        { "title" : "assetcategory","useAs": "commandLineArgument", "type": "string", "default": "buildings", "allowed": ["buildings"]},
+        { "title" : "losscategory", "useAs": "commandLineArgument","type": "string", "default": "structural", "allowed": ["structural"]},
+        { "title" : "taxonomies", "useAs": "commandLineArgument","type": "string", "default": ""}
+     ],
+    "output": [
+        { "title": "selectedRows", "readFrom": "file", "path": "output/query_output.json", "type": "json"}
+    ]
+}
