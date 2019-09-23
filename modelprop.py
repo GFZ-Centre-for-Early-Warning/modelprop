@@ -5,7 +5,7 @@ ModelProp
 -----------------
 Command line program to query fragility/vulnerability data from a database/file
 according to a given schema and (optinally) for a set of taxonomies
-Authors: 
+Authors:
 - Massimiliano Pittore, GFZ-Potsdam
 - Nils Brinckmann, GFZ-Potsdam
 '''
@@ -36,7 +36,6 @@ def get_supported_schemas():
         if parentname + '_struct.json' == basename:
             supported_schemas.add(parentname)
 
-
     return supported_schemas
 
 
@@ -60,15 +59,14 @@ class Main():
                 self.selectedtaxonomies = json.loads(args.taxonomies)
             except json.decoder.JSONDecodeError:
                 print('Error Decoding Taxonomy list. Using "None".')
-                pass
-        
-        #i/o settings
+
+        # i/o settings
         self.path_infile = self.folder
         self.in_file = self.folder
         self.path_outfile = os.path.join(self.folder, 'output')
         self.out_file_geojson = 'query_output.json'
-        
-        #list of supported schemas. 
+
+        # list of supported schemas
         self.supported_schemas = get_supported_schemas()
 
         # results
@@ -76,32 +74,34 @@ class Main():
         self.query_result_metadata = None
 
     def _check_schema(self):
-        return(set([self.schema]) <= set(self.supported_schemas))
-     
+        return set([self.schema]) <= set(self.supported_schemas)
+
     def _check_taxonomies(self, selected):
         '''
-        check if the taxonomies in the list "selected" are 
+        check if the taxonomies in the list "selected" are
         contained in the metadata
         '''
         if self.metadata:
-            return set(selected) <= set(self.metadata['taxonomies']) 
-        else:
-            print("_check_taxonomies: metadata are not defined.")
-            return False
-    
+            return set(selected) <= set(self.metadata['taxonomies'])
+
+        print("_check_taxonomies: metadata are not defined.")
+        return False
+
     def _read_schema(self, input_file):
         '''
         read fragility/vulnerability model from a json file.
-        the file contains two dictionaries: 
-        1) 'meta' includes information (metadata) on the schema, the list of taxonomies and
-           damage states
+        the file contains two dictionaries:
+        1) 'meta' includes information (metadata) on the schema,
+            the list of taxonomies and
+            damage states
         2) 'data' provides the mean and log. std deviation of the lognormal
-           distribution encoding the fragility / vulnerability descriptions
-        the function returns a dictionary with metadata and a pandas dataframe
+            distribution encoding the fragility / vulnerability
+            descriptions the function returns a dictionary with
+            metadata and a pandas dataframe
         '''
         with open(input_file, 'rt') as file_handle:
             parsed = json.load(file_handle)
-        
+
         self.metadata = parsed['meta']
         self.data = pd.DataFrame(parsed['data'])
         return 0
@@ -109,51 +109,61 @@ class Main():
     def _write_schema(self, metadata, data, output_file):
         '''
         write fragility/vulnerability schema to a json file.
-        the file contains two dictionaries: 
-        1) 'meta' includes information (metadata) on the schema, the list of taxonomies and
-           damage states
+        the file contains two dictionaries:
+        1) 'meta' includes information (metadata) on the schema,
+            the list of taxonomies and damage states
         2) 'data' provides the mean and log. std deviation of the lognormal
-           distribution encoding the fragility / vulnerability descriptions
-        the function accepts a dictionary with metadata and a pandas dataframe
+            distribution encoding the fragility / vulnerability
+            descriptions the function accepts a dictionary with
+            metadata and a pandas dataframe
         '''
         if (metadata is not None) and (data is not None):
             modict = {}
             modict['meta'] = metadata
-            #data should be a pandas dataframe
+            # data should be a pandas dataframe
             modict['data'] = data.to_dict(orient='records')
             with open(output_file, 'wt') as file_handle:
                 json.dump(modict, file_handle, indent=4)
             return 0
-        else:
-            print ("_write_schema: metadata or data are missing.")
-            return 1
-        
-    
-    def _queryModel(self):
+
+        print("_write_schema: metadata or data are missing.")
+        return 1
+
+    def _query_model(self):
         '''
-        extract a part of the model by doing a query on the 
+        extract a part of the model by doing a query on the
         selected taxonomies (selectedtaxonomies)
         '''
         if self.selectedtaxonomies:
             if self._check_taxonomies(self.selectedtaxonomies):
                 self.query_result_metadata = self.metadata.copy()
-                self.query_result_metadata['taxonomies'] = self.selectedtaxonomies
-                self.query_result_data = self.data.set_index('taxonomy').loc[self.selectedtaxonomies].reset_index()
+                self.query_result_metadata['taxonomies'] = \
+                    self.selectedtaxonomies
+                self.query_result_data = self.data.set_index(
+                    'taxonomy'
+                ).loc[self.selectedtaxonomies].reset_index()
         else:
             self.query_result_data = self.data
             self.query_result_metadata = self.metadata
-        
+
         return 0
-    
+
     def _write_outputs(self):
         '''
         Export query result as geojson file
         '''
         if not os.path.exists(self.path_outfile):
             os.mkdir(self.path_outfile)
-        output_geojson = os.path.join(self.path_outfile,self.out_file_geojson)
-        self._write_schema(self.query_result_metadata, self.query_result_data,output_geojson)
-    
+        output_geojson = os.path.join(
+            self.path_outfile,
+            self.out_file_geojson
+        )
+        self._write_schema(
+            self.query_result_metadata,
+            self.query_result_data,
+            output_geojson
+        )
+
     def run(self):
         '''
         Method to:
@@ -162,23 +172,25 @@ class Main():
         - write the output(s)
         '''
         if self._check_schema():
-            foldername = os.path.join(self.folder, 'schemas/{}'.format(self.schema))
+            foldername = os.path.join(
+                self.folder,
+                'schemas/{}'.format(self.schema)
+            )
             self.path_infile = foldername
             self.in_file = '{}_struct.json'.format(self.schema)
         else:
             raise Exception('schema {} not supported'.format(self.schema))
 
-        #read model from file 
-        in_file = os.path.join(self.path_infile,self.in_file)
+        # read model from file
+        in_file = os.path.join(self.path_infile, self.in_file)
         self._read_schema(in_file)
 
-        #query
-        self._queryModel()
+        # query
+        self._query_model()
 
-        #write outputs
+        # write outputs
         self._write_outputs()
         return 0
-
 
     @classmethod
     def create_with_arg_parser(cls):
@@ -207,7 +219,7 @@ class Main():
             type=str,
             default='structural'
         )
-        arg_parser.add_argument( 
+        arg_parser.add_argument(
             '-taxonomies',
             help='selected taxonomies',
             type=str
@@ -215,6 +227,7 @@ class Main():
 
         args = arg_parser.parse_args()
         return cls(args)
+
 
 if __name__ == '__main__':
     Main.create_with_arg_parser().run()
