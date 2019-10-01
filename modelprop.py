@@ -1,17 +1,43 @@
-#!/usr/bin/env/python
+#!/usr/bin/env python3
 
 '''
 ModelProp
 -----------------
 Command line program to query fragility/vulnerability data from a database/file
 according to a given schema and (optinally) for a set of taxonomies
-Author: Massimiliano Pittore, GFZ-Potsdam
+Authors:
+- Massimiliano Pittore, GFZ-Potsdam
+- Nils Brinckmann, GFZ-Potsdam
 '''
 
 import argparse
-import os
-import pandas as pd
+import glob
 import json
+import os
+
+import pandas as pd
+
+
+def get_supported_schemas():
+    '''
+    Searches for supported schemas in the schemas folder.
+    '''
+    current_dir = os.path.dirname(__file__)
+    schema_dir = os.path.join(current_dir, 'schemas')
+    glob_str = os.path.join(schema_dir, '*', '*_struct.json')
+    globbed_files = glob.glob(glob_str)
+
+    supported_schemas = set()
+    for single_file in globbed_files:
+        basename = os.path.basename(single_file)
+        dirname = os.path.dirname(single_file)
+        parentname = os.path.basename(dirname)
+
+        if parentname + '_struct.json' == basename:
+            supported_schemas.add(parentname)
+
+    return supported_schemas
+
 
 class Main():
     '''
@@ -32,124 +58,112 @@ class Main():
             try:
                 self.selectedtaxonomies = json.loads(args.taxonomies)
             except json.decoder.JSONDecodeError:
-                print("Error Decoding Taxonomy list. Using 'None'.")
-                pass
-        
-        #i/o settings
+                print('Error Decoding Taxonomy list. Using "None".')
+
+        # i/o settings
         self.path_infile = self.folder
         self.in_file = self.folder
-        self.path_outfile = os.path.join(self.folder,"output")
-        self.out_file_xml = "query_output.nrml"
+        self.path_outfile = os.path.join(self.folder, 'output')
         self.out_file_geojson = 'query_output.json'
-        
-        #list of supported schemas. 
-        #TODO: automatically parse them from a given folder
-        self.supported_schemas = ['SARA_v1.0']
+
+        # list of supported schemas
+        self.supported_schemas = get_supported_schemas()
 
         # results
         self.query_result_data = None
         self.query_result_metadata = None
 
     def _check_schema(self):
-        return(set([self.schema]) <= set(self.supported_schemas))
-     
-    def _check_taxonomies(self,selected):
+        return set([self.schema]) <= set(self.supported_schemas)
+
+    def _check_taxonomies(self, selected):
         '''
-        check if the taxonomies in the list "selected" are 
+        check if the taxonomies in the list "selected" are
         contained in the metadata
         '''
-        if (self.metadata):
-            return(set(selected) <= set(self.metadata['taxonomies']))
-        else:
-            print("_check_taxonomies: metadata are not defined.")
-            return(False)
-    
+        if self.metadata:
+            return set(selected) <= set(self.metadata['taxonomies'])
+
+        print("_check_taxonomies: metadata are not defined.")
+        return False
+
     def _read_schema(self, input_file):
         '''
         read fragility/vulnerability model from a json file.
-        the file contains two dictionaries: 
-        1) 'meta' includes information (metadata) on the schema, the list of taxonomies and
-           damage states
+        the file contains two dictionaries:
+        1) 'meta' includes information (metadata) on the schema,
+            the list of taxonomies and
+            damage states
         2) 'data' provides the mean and log. std deviation of the lognormal
-           distribution encoding the fragility / vulnerability descriptions
-        the function returns a dictionary with metadata and a pandas dataframe
+            distribution encoding the fragility / vulnerability
+            descriptions the function returns a dictionary with
+            metadata and a pandas dataframe
         '''
-        with open(input_file,'r') as f:
-            parsed = json.load(f)
-        
+        with open(input_file, 'rt') as file_handle:
+            parsed = json.load(file_handle)
+
         self.metadata = parsed['meta']
         self.data = pd.DataFrame(parsed['data'])
-        return(0)
+        return 0
 
     def _write_schema(self, metadata, data, output_file):
         '''
         write fragility/vulnerability schema to a json file.
-        the file contains two dictionaries: 
-        1) 'meta' includes information (metadata) on the schema, the list of taxonomies and
-           damage states
+        the file contains two dictionaries:
+        1) 'meta' includes information (metadata) on the schema,
+            the list of taxonomies and damage states
         2) 'data' provides the mean and log. std deviation of the lognormal
-           distribution encoding the fragility / vulnerability descriptions
-        the function accepts a dictionary with metadata and a pandas dataframe
+            distribution encoding the fragility / vulnerability
+            descriptions the function accepts a dictionary with
+            metadata and a pandas dataframe
         '''
-        if ((metadata is not None) and (data is not None)):
+        if (metadata is not None) and (data is not None):
             modict = {}
             modict['meta'] = metadata
-            #data should be a pandas dataframe
+            # data should be a pandas dataframe
             modict['data'] = data.to_dict(orient='records')
-            with open(output_file,'w') as f:
-                json.dump(modict,f, indent=4)
-            return (0)
-        else:
-            print ("_write_schema: metadata or data are missing.")
-            return(1)
-        
-    
-    def _queryModel(self):
+            with open(output_file, 'wt') as file_handle:
+                json.dump(modict, file_handle, indent=4)
+            return 0
+
+        print("_write_schema: metadata or data are missing.")
+        return 1
+
+    def _query_model(self):
         '''
-        extract a part of the model by doing a query on the 
+        extract a part of the model by doing a query on the
         selected taxonomies (selectedtaxonomies)
         '''
-        if (self.selectedtaxonomies):
-            if (self._check_taxonomies(self.selectedtaxonomies)):
+        if self.selectedtaxonomies:
+            if self._check_taxonomies(self.selectedtaxonomies):
                 self.query_result_metadata = self.metadata.copy()
-                self.query_result_metadata['taxonomies']=self.selectedtaxonomies
-                self.query_result_data = self.data.set_index('taxonomy').loc[self.selectedtaxonomies].reset_index()
+                self.query_result_metadata['taxonomies'] = \
+                    self.selectedtaxonomies
+                self.query_result_data = self.data.set_index(
+                    'taxonomy'
+                ).loc[self.selectedtaxonomies].reset_index()
         else:
             self.query_result_data = self.data
             self.query_result_metadata = self.metadata
-        
-        return(0)
-    
-    def _exportGeoJson(self, dataframe, filename):
-        '''
-        Export geopandas dataframe as GeoJson file
-        '''
-        # file has to be first deleted
-        # because driver does not support overwrite ! 
-        try: 
-            os.remove(filename)
-        except OSError:
-            pass
-        dataframe.to_file(filename, driver='GeoJSON')
-        return (0)
 
-    def _exportNrml05(self, dataframe, filename, metadata, dicts,taxonomies):
-        '''
-        Export geopandas dataframe as nrml file
-        '''
-        xml_string = nrml.write_nrml05_expo(dataframe,metadata,dicts,taxonomies,filename)
-        return (0)
+        return 0
 
     def _write_outputs(self):
         '''
-        Export query result as nrml and geojson files
+        Export query result as geojson file
         '''
-        output_geojson = os.path.join(self.path_outfile,self.out_file_geojson)
-        self._write_schema(self.query_result_metadata, self.query_result_data,output_geojson)
-        #output_xml = os.path.join(self.path_outfile,self.out_file_xml)
-        #self._exportNrml05(self.query_result, output_xml, self.metadata, 
-        #                   self.dicts,self.taxonomies)
-    
+        if not os.path.exists(self.path_outfile):
+            os.mkdir(self.path_outfile)
+        output_geojson = os.path.join(
+            self.path_outfile,
+            self.out_file_geojson
+        )
+        self._write_schema(
+            self.query_result_metadata,
+            self.query_result_data,
+            output_geojson
+        )
+
     def run(self):
         '''
         Method to:
@@ -157,24 +171,26 @@ class Main():
         - query the model based on a list of taxonomies
         - write the output(s)
         '''
-        if (self._check_schema()):
-            foldername = os.path.join(self.folder,"schemas/{}".format(self.schema))
+        if self._check_schema():
+            foldername = os.path.join(
+                self.folder,
+                'schemas/{}'.format(self.schema)
+            )
             self.path_infile = foldername
-            self.in_file = "{}_struct.json".format(self.schema)
+            self.in_file = '{}_struct.json'.format(self.schema)
         else:
-            raise Exception ("schema {} not supported".format(self.schema))
+            raise Exception('schema {} not supported'.format(self.schema))
 
-        #read model from file 
-        in_file = os.path.join(self.path_infile,self.in_file)
+        # read model from file
+        in_file = os.path.join(self.path_infile, self.in_file)
         self._read_schema(in_file)
 
-        #query
-        self._queryModel()
+        # query
+        self._query_model()
 
-        #write outputs
+        # write outputs
         self._write_outputs()
-        return (0)
-
+        return 0
 
     @classmethod
     def create_with_arg_parser(cls):
@@ -189,25 +205,29 @@ class Main():
             'schema',
             help='Exposure/Vulnerability Schema',
             type=str,
-            default="SARA_v1.0")
+            default='SARA_v1.0'
+        )
         arg_parser.add_argument(
             'assetcategory',
             help='Type of exposed assets',
             type=str,
-            default='buildings')
+            default='buildings'
+        )
         arg_parser.add_argument(
             'losscategory',
             help='damage or loss computation',
             type=str,
-            default='structural')
-        arg_parser.add_argument( 
+            default='structural'
+        )
+        arg_parser.add_argument(
             '-taxonomies',
-            #narg='?',
             help='selected taxonomies',
-            type=str)
+            type=str
+        )
 
         args = arg_parser.parse_args()
         return cls(args)
+
 
 if __name__ == '__main__':
     Main.create_with_arg_parser().run()
