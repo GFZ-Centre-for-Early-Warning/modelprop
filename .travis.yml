@@ -20,6 +20,7 @@ jobs:
       script:
         - python3 -m compileall . assistance/*.py
     - stage: dockerbuild
+      install: skip
       script:
         - docker build -f metadata/Dockerfile .
     - stage: pep8check
