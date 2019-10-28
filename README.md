@@ -1,5 +1,9 @@
 # modelprop
 
+
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/gfzriesgos/modelprop)](https://hub.docker.com/r/gfzriesgos/modelprop)
+[![Build Status](https://travis-ci.com/gfzriesgos/modelprop.svg?branch=master)](https://travis-ci.com/gfzriesgos/modelprop)
+
 ## Purpose
 Program to serve a fragility / vulnerability model
 according to a given schema - RIESGOS Project
@@ -46,7 +50,8 @@ import modelprop
 modelprop.get_supported_schemas()
 ```
 
-## Suppported asset categories
+
+## Supported asset categories
 
 At the moment only buildings are supported.
 
