@@ -12,6 +12,7 @@ stages:
   - pep8check
   - pylintcheck
   - test
+  - test notebook
   - dockerbuild
 
 jobs:
@@ -34,6 +35,9 @@ jobs:
       script:
         - pylint --exit-zero *.py assistance/*.py
     - stage: test
+      script:
+        - python3 test_all.py
+    - stage: test notebook
       before_script:
         - pip3 install scipy jupyter nbconvert ipykernel matplotlib
       script:
