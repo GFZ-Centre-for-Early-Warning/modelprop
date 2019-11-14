@@ -41,6 +41,8 @@ At the moment we support the following schemas:
 * HAZUS-v1.0
 * SARA-v1.0
 * SUPPASRI2013-v2.0
+* Mavrouli et al. 2014
+* Torres Corredor et al. 2017
 
 You can get a up to date list of the supported schemas by running the following commands
 in a python shell from within this folder:
