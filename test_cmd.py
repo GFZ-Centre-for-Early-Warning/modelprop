@@ -89,6 +89,7 @@ class TestMavrouli(unittest.TestCase):
 
         self.assertEqual(schema, output_data['meta']['id'])
 
+
 class TestSuppasri(unittest.TestCase):
     """
     Test class to query the modelprop for suppasri.
@@ -127,6 +128,7 @@ class TestSuppasri(unittest.TestCase):
             output_data = json.load(fh)
 
         self.assertEqual(schema, output_data['meta']['id'])
+
 
 class TestSara(unittest.TestCase):
     """
@@ -167,6 +169,6 @@ class TestSara(unittest.TestCase):
 
         self.assertEqual(schema, output_data['meta']['id'])
 
+
 if __name__ == '__main__':
     unittest.main()
-

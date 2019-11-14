@@ -28,12 +28,12 @@ jobs:
       install:
         - pip3 install pycodestyle
       script:
-        - pycodestyle *.py assistance/*.py || true
+        - shopt -s globstar && pycodestyle **/*.py
     - stage: pylintcheck
       before_script:
         - pip3 install pylint
       script:
-        - pylint --exit-zero *.py assistance/*.py
+        - shopt -s globstar && pylint --exit-zero **/*.py
     - stage: test
       script:
         - python3 test_all.py
