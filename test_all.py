@@ -8,6 +8,8 @@ import unittest
 
 import modelprop
 
+from test_cmd import *
+
 
 class TestAll(unittest.TestCase):
     '''
@@ -21,7 +23,7 @@ class TestAll(unittest.TestCase):
         '''
         supported_schemas = modelprop.get_supported_schemas()
 
-        assumed_schemas = ['HAZUS_v1.0', 'SARA_v1.0', 'SUPPASRI2013_v2.0']
+        assumed_schemas = ['HAZUS_v1.0', 'SARA_v1.0', 'SUPPASRI2013_v2.0', 'Mavrouli_et_al_2014', 'Torres_Corredor_et_al_2017']
 
         self.assertTrue(supported_schemas)
 
