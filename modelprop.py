@@ -18,6 +18,18 @@ import os
 import pandas as pd
 
 
+def without_nan(list_of_dicts):
+    """Take a list of dicts with values and return it without nans."""
+    result = []
+    for single_dict in list_of_dicts:
+        entry_to_set = {}
+        for key in single_dict:
+            if not pd.isna(single_dict[key]):
+                entry_to_set[key] = single_dict[key]
+        result.append(entry_to_set)
+    return result
+
+
 def get_supported_schemas():
     '''
     Searches for supported schemas in the schemas folder.
@@ -121,7 +133,7 @@ class Main():
             modict = {}
             modict['meta'] = metadata
             # data should be a pandas dataframe
-            modict['data'] = data.to_dict(orient='records')
+            modict['data'] = without_nan(data.to_dict(orient='records'))
             with open(output_file, 'wt') as file_handle:
                 json.dump(modict, file_handle, indent=4)
             return 0
