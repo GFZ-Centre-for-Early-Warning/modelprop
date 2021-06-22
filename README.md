@@ -8,6 +8,10 @@
 Program to serve a fragility / vulnerability model
 according to a given schema - RIESGOS Project
 
+## Citation
+
+Pittore, M., Gomez-Zapata, J. C., Brinckmann, N., Rüster, M. (2021): Assetmaster and Modelprop: web services to serve building exposure models and fragility functions for physical vulnerability to natural-hazards. V. 1.0. GFZ Data Services. https://doi.org/10.5880/riesgos.2021.005
+
 ## Setup
 
 We use a virtual environment, so you can need to create it and
@@ -75,3 +79,18 @@ fragility function data for your taxonomy.
 Every taxonomy that is listed in the data list must also be in the meta section and vice versa.
 
 You can test it with the `assistance/check_modelprop_json_file.py` file.
+
+## Copyright & License
+Copyright © 2021 Helmholtz Centre Potsdam GFZ German Research Centre for Geosciences, Potsdam, Germany
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+## Project
+
+Deus was developed in the scope of the RIESGOS project:
+Multi-Risk Analysis and Information System Components for the Andes Region (https://www.riesgos.de/en)
+
