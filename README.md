@@ -10,7 +10,7 @@ according to a given schema - RIESGOS Project
 
 ## Citation
 
-Pittore, M., Gomez-Zapata, J. C., Brinckmann, N., Rüster, M. (2021): Assetmaster and Modelprop: web services to serve building exposure models and fragility functions for physical vulnerability to natural-hazards. V. 1.0. GFZ Data Services. https://doi.org/10.5880/riesgos.2021.005
+Pittore, Massimiliano; Gomez-Zapata, Juan Camilo; Brinckmann, Nils; Rüster, Matthias (2021): Assetmaster and Modelprop: web services to serve building exposure models and fragility functions for physical vulnerability to natural-hazards. V. 1.0. GFZ Data Services. https://doi.org/10.5880/riesgos.2021.005
 
 ## Setup
 
