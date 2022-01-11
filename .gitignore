@@ -36,7 +36,7 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/schema 
+htmlcov/schema
 .tox/
 .coverage
 .coverage.*
@@ -49,7 +49,7 @@ coverage.xml
 
 # Translations
 *.mo
-*.potschema 
+*.potschema
 
 # Django stuff:
 *.log
@@ -108,4 +108,4 @@ venv.bak/
 .DS_Store
 
 .idea
-output/
+output/*
