@@ -1,6 +1,6 @@
 {
     "title": "ModelpropProcess",
-    "imageId": "modelprop:latest",
+    "imageId": "gfzriesgos/modelprop:latest",
     "workingDirectory": "/usr/share/git/modelprop",
     "commandToExecute": "python3 modelprop.py",
     "exitValueHandler": "logging",
