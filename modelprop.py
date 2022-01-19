@@ -158,7 +158,9 @@ class Main:
         if self.selectedtaxonomies:
             if self._check_taxonomies(self.selectedtaxonomies):
                 self.query_result_metadata = self.metadata.copy()
-                self.query_result_metadata["taxonomies"] = self.selectedtaxonomies
+                self.query_result_metadata[
+                    "taxonomies"
+                ] = self.selectedtaxonomies
                 self.query_result_data = (
                     self.data.set_index("taxonomy")
                     .loc[self.selectedtaxonomies]
@@ -189,7 +191,9 @@ class Main:
         - write the output(s)
         """
         if self._check_schema():
-            foldername = os.path.join(self.folder, "schemas/{}".format(self.schema))
+            foldername = os.path.join(
+                self.folder, "schemas/{}".format(self.schema)
+            )
             self.path_infile = foldername
             self.in_file = "{}_struct.json".format(self.schema)
         else:
@@ -233,7 +237,9 @@ class Main:
             type=str,
             default="structural",
         )
-        arg_parser.add_argument("-taxonomies", help="selected taxonomies", type=str)
+        arg_parser.add_argument(
+            "-taxonomies", help="selected taxonomies", type=str
+        )
 
         args = arg_parser.parse_args()
         return cls(args)

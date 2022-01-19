@@ -33,7 +33,8 @@ class TestTorres(unittest.TestCase):
         path_modelprop = os.path.join(current_dir, "modelprop.py")
 
         subprocess.run(
-            ["python3", path_modelprop, schema, "buildings", "structural"], check=True
+            ["python3", path_modelprop, schema, "buildings", "structural"],
+            check=True,
         )
         output_file = os.path.join(current_dir, "output", "query_output.json")
 
@@ -58,7 +59,8 @@ class TestMavrouli(unittest.TestCase):
         path_modelprop = os.path.join(current_dir, "modelprop.py")
 
         subprocess.run(
-            ["python3", path_modelprop, schema, "buildings", "structural"], check=True
+            ["python3", path_modelprop, schema, "buildings", "structural"],
+            check=True,
         )
         output_file = os.path.join(current_dir, "output", "query_output.json")
 
@@ -83,7 +85,8 @@ class TestSuppasri(unittest.TestCase):
         path_modelprop = os.path.join(current_dir, "modelprop.py")
 
         subprocess.run(
-            ["python3", path_modelprop, schema, "buildings", "structural"], check=True
+            ["python3", path_modelprop, schema, "buildings", "structural"],
+            check=True,
         )
         output_file = os.path.join(current_dir, "output", "query_output.json")
 
@@ -108,7 +111,8 @@ class TestSara(unittest.TestCase):
         path_modelprop = os.path.join(current_dir, "modelprop.py")
 
         subprocess.run(
-            ["python3", path_modelprop, schema, "buildings", "structural"], check=True
+            ["python3", path_modelprop, schema, "buildings", "structural"],
+            check=True,
         )
         output_file = os.path.join(current_dir, "output", "query_output.json")
 
@@ -133,7 +137,8 @@ class TestMedina(unittest.TestCase):
         path_modelprop = os.path.join(current_dir, "modelprop.py")
 
         subprocess.run(
-            ["python3", path_modelprop, schema, "buildings", "structural"], check=True
+            ["python3", path_modelprop, schema, "buildings", "structural"],
+            check=True,
         )
         output_file = os.path.join(current_dir, "output", "query_output.json")
 
