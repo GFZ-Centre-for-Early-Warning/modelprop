@@ -7,7 +7,7 @@
         "taxonomy_source": "Torres_Corredor_et_al_2017",
         "damage_states": "Torres_Corredor_et_al_2017",
         "format": "continuous",
-        "shape": "logncdf",
+        "shape": "normcdf",
         "description": "Torres_Corredor_et_al_2017, project RIESGOS",
         "taxonomies": 
         [
