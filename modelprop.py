@@ -143,8 +143,11 @@ class Main:
             modict["meta"] = metadata
             # data should be a pandas dataframe
             modict["data"] = without_nan(data.to_dict(orient="records"))
+
             with open(output_file, "wt") as file_handle:
-                json.dump(modict, file_handle, indent=4)
+                json.dump(modict, file_handle, separators=(",", ":"))
+                file_handle.close()
+
             return 0
 
         print("_write_schema: metadata or data are missing.")
