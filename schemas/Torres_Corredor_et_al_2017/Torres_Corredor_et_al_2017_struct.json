@@ -1,0 +1,172 @@
+{
+    "meta": 
+    {
+        "id": "Torres_Corredor_et_al_2017",
+        "assetCategory": "buildings",
+        "lossCategory": "structural",
+        "taxonomy_source": "Torres_Corredor_et_al_2017",
+        "damage_states": "Torres_Corredor_et_al_2017",
+        "format": "continuous",
+        "shape": "normcdf",
+        "description": "Torres_Corredor_et_al_2017, project RIESGOS",
+        "taxonomies": 
+        [
+           "LM_B",
+           "LM_R",
+           "LM_M",
+           "P_B",
+           "P_R",
+           "P_M",
+           "L_B",
+           "L_R",
+           "L_M"
+        ],
+        
+        "limit_states": 
+        [
+            "D1",
+            "D2",
+            "D3"
+        ]
+     
+    },
+    "data": 
+    [
+        {
+            "taxonomy": "LM_B",
+            "D1_mean": 0.525,
+            "D1_stddev": 0.105,
+            "D2_mean": 0.6375,
+            "D2_stddev": 0.1275,
+            "D3_mean": 0.75,
+            "D3_stddev": 0.15,
+			"id":"unique_id",
+			"imt":"load",
+			"imu":"kPa",
+			"im_min":0.0,
+			"im_max":6.0
+        },
+        
+      
+        {
+            "taxonomy": "LM_R",
+            "D1_mean": 0.63,
+            "D1_stddev": 0.126,
+            "D2_mean": 0.765,
+            "D2_stddev": 0.153,
+            "D3_mean": 0.9,
+            "D3_stddev": 0.18,
+			"id":"unique_id",
+			"imt":"load",
+			"imu":"kPa",
+			"im_min":0.0,
+			"im_max":6.0
+        },
+        
+        {
+            "taxonomy": "LM_M",
+            "D1_mean": 0.525,
+            "D1_stddev": 0.105,
+            "D2_mean": 0.6375,
+            "D2_stddev": 0.1275,
+            "D3_mean": 0.75,
+            "D3_stddev": 0.15,
+			"id":"unique_id",
+            "imt":"load",
+			"imu":"kPa",
+			"im_min":0.0,
+			"im_max":6.0
+        },
+        
+        {
+           "taxonomy": "P_B",
+           "D1_mean": 2.1,
+           "D1_stddev": 0.42,
+           "D2_mean": 2.55,
+           "D2_stddev": 0.51,
+           "D3_mean": 3,
+           "D3_stddev": 0.6,
+           "id":"unique_id",
+           "imt":"load",
+           "imu":"kPa",
+           "im_min":0.0,
+           "im_max":6.0
+        },
+        
+        {
+            "taxonomy": "P_M",
+            "D1_mean": 1.575,
+            "D1_stddev": 0.315,
+            "D2_mean": 1.9125,
+            "D2_stddev": 0.3825,
+            "D3_mean": 2.25,
+            "D3_stddev": 0.45,
+            "id":"unique_id",
+            "imt":"load",
+            "imu":"kPa",
+            "im_min":0.0,
+            "im_max":6.0
+        },
+
+        {
+            "taxonomy": "P_R",
+            "D1_mean": 1.89,
+            "D1_stddev": 0.378,
+            "D2_mean": 2.295,
+            "D2_stddev": 0.459,
+            "D3_mean": 2.7,
+            "D3_stddev": 0.54,
+            "id":"unique_id",
+            "imt":"load",
+            "imu":"kPa",
+            "im_min":0.0,
+            "im_max":6.0
+        },
+    
+        {
+            "taxonomy": "L_B", 
+            "D1_mean": 4.05,
+            "D1_stddev": 0.81,
+            "D2_mean": 4.69,
+            "D2_stddev": 0.938,
+            "D3_mean": 5.33,
+            "D3_stddev": 1.066,
+            "id":"unique_id",
+            "imt":"load",
+            "imu":"kPa",
+            "im_min":0.0,
+            "im_max":6.0
+        },
+    
+        {
+            "taxonomy": "L_R",
+            "D1_mean": 3.645,
+            "D1_stddev": 0.729,
+            "D2_mean": 4.221,
+            "D2_stddev": 0.8442,
+            "D3_mean": 4.797,
+            "D3_stddev": 0.9594,
+            "id":"unique_id",
+            "imt":"load",
+            "imu":"kPa",
+            "im_min":0.0,
+            "im_max":6.0 
+        },
+    
+        {
+            "taxonomy": "L_M",
+            "D1_mean": 3.24,
+            "D1_stddev": 0.648,
+            "D2_mean": 3.752,
+            "D2_stddev": 0.7504,
+            "D3_mean": 4.264,
+            "D3_stddev": 0.8528,
+            "id":"unique_id",
+            "imt":"load",
+            "imu":"kPa",
+            "im_min":0.0,
+            "im_max":6.0
+        }
+                    
+    ]
+}

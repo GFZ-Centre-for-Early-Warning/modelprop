@@ -1,12 +1,21 @@
 {
     "title": "ModelpropProcess",
-    "imageId": "modelprop:latest",
+    "imageId": "gfzriesgos/modelprop:latest",
     "workingDirectory": "/usr/share/git/modelprop",
     "commandToExecute": "python3 modelprop.py",
     "exitValueHandler": "logging",
     "stderrHandler": "pythonTraceback",
     "input": [
-        { "title" : "schema","useAs": "commandLineArgument", "type": "string", "default": "SARA_v1.0", "allowed": ["SARA_v1.0"]},
+        { "title" : "schema","useAs": "commandLineArgument", "type": "string", "default": "SARA_v1.0",
+            "allowed": [
+                "SARA_v1.0",
+                "HAZUS_v1.0",
+                "SUPPASRI2013_v2.0",
+                "Mavrouli_et_al_2014",
+                "Torres_Corredor_et_al_2017",
+                "Medina_2019"
+            ]
+        },
         { "title" : "assetcategory","useAs": "commandLineArgument", "type": "string", "default": "buildings", "allowed": ["buildings"]},
         { "title" : "losscategory", "useAs": "commandLineArgument","type": "string", "default": "structural", "allowed": ["structural"]},
         { "title" : "taxonomies", "useAs": "commandLineArgument","type": "string", "default": "", "commandLineFlag": "-taxonomies"}
